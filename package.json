@@ -1,0 +1,61 @@
+{
+  "name": "edge-template-boilerplate",
+  "version": "0.1.0",
+  "description": "Base para maquetar un nuevo proyecto web con Edge, SCSS, JS usando Gulp y Webpack.",
+  "main": "src/assets/js/app.js",
+  "scripts": {
+    "dev": "gulp --server --watch",
+    "build": "gulp build --production",
+    "watch": "gulp build --watch --production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javipuche/edge-template-boilerplate.git"
+  },
+  "keywords": [
+    "gulp",
+    "webpack",
+    "boilerplate",
+    "edge",
+    "edgejs"
+  ],
+  "author": "Javier Puche",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/javipuche/edge-template-boilerplate/issues"
+  },
+  "homepage": "https://github.com/javipuche/edge-template-boilerplate#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "autoprefixer": "^9.5.1",
+    "babel-loader": "^8.0.5",
+    "browser-sync": "^2.26.3",
+    "css-loader": "^2.1.1",
+    "css-mqpacker": "^7.0.0",
+    "del": "^4.1.0",
+    "directory-tree": "^2.2.1",
+    "file-loader": "^3.0.1",
+    "fs": "0.0.1-security",
+    "gulp": "^4.0.0",
+    "gulp-edgejs": "^0.2.4",
+    "gulp-if": "^2.0.2",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-mem": "^0.1.1",
+    "gulp-plumber": "^1.2.1",
+    "gulp-pretty-html": "^2.0.10",
+    "image-webpack-loader": "^4.6.0",
+    "mini-css-extract-plugin": "^0.5.0",
+    "node-notifier": "^5.4.0",
+    "node-sass": "^4.11.0",
+    "path": "^0.12.7",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "webpack": "^4.29.6",
+    "webpack-merge": "^4.2.1",
+    "webpack-stream": "^5.2.1",
+    "edge.js": "^1.1.4"
+  }
+}

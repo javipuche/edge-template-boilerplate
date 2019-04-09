@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>{{ pageTitle ? pageTitle : 'Page without title' }}</title>
+
+        @section('css')
+            <link rel="stylesheet" href="{{root}}assets/css/app.css">
+        @endsection
+    </head>
+    <body>
+        @section('header')
+            @include('partials.header')
+        @endsection
+
+        @!section('body')
+
+        @section('footer')
+            @include('partials.footer')
+        @endsection
+
+        @section('scripts')
+            <script src="{{root}}assets/js/app.js" charset="utf-8" defer></script>
+        @endsection
+    </body>
+</html>
