@@ -4,9 +4,9 @@
   "description": "Base para maquetar un nuevo proyecto web con Edge, SCSS, JS usando Gulp y Webpack.",
   "main": "src/assets/js/app.js",
   "scripts": {
-    "dev": "gulp --server --watch",
-    "build": "gulp build --production",
-    "watch": "gulp build --watch --production"
+    "dev": "gulp --gulpfile builder/index.js --require @babel/register --server --watch",
+    "build": "gulp --gulpfile builder/index.js --require @babel/register build --production",
+    "watch": "gulp --gulpfile builder/index.js --require @babel/register build --watch --production"
   },
   "repository": {
     "type": "git",
@@ -28,16 +28,18 @@
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
+    "@babel/register": "^7.4.0",
     "autoprefixer": "^9.5.1",
     "babel-loader": "^8.0.5",
-    "browser-sync": "^2.26.3",
+    "browser-sync": "^2.26.4",
     "css-loader": "^2.1.1",
     "css-mqpacker": "^7.0.0",
     "del": "^4.1.0",
     "directory-tree": "^2.2.1",
+    "edge.js": "^1.1.4",
     "file-loader": "^3.0.1",
     "fs": "0.0.1-security",
-    "gulp": "^4.0.0",
+    "gulp": "^4.0.1",
     "gulp-edgejs": "^0.2.4",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^5.0.3",
@@ -45,7 +47,7 @@
     "gulp-plumber": "^1.2.1",
     "gulp-pretty-html": "^2.0.10",
     "image-webpack-loader": "^4.6.0",
-    "mini-css-extract-plugin": "^0.5.0",
+    "mini-css-extract-plugin": "^0.6.0",
     "node-notifier": "^5.4.0",
     "node-sass": "^4.11.0",
     "path": "^0.12.7",
@@ -53,9 +55,8 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.1.2",
-    "webpack": "^4.29.6",
+    "webpack": "^4.30.0",
     "webpack-merge": "^4.2.1",
-    "webpack-stream": "^5.2.1",
-    "edge.js": "^1.1.4"
+    "webpack-stream": "^5.2.1"
   }
 }

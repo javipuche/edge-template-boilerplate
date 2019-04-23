@@ -1,8 +1,8 @@
-const path                 = require('path');
-const UglifyJSPlugin       = require('uglifyjs-webpack-plugin');
-const merge                = require('webpack-merge');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const isProduction         = process.argv.indexOf('--production') >= 0;
+import path from 'path';
+import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
+import merge from 'webpack-merge';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { source, paths, publicPath, ext, filename, isProduction, isWatching, gulpType } from '../config';
 
 
 /* -----------------------------------------------------------------------------
@@ -11,22 +11,15 @@ const isProduction         = process.argv.indexOf('--production') >= 0;
 
 let common = {
     output: {
-        path: path.join(__dirname, 'dist'),
-        filename: 'assets/js/app.js',
-        publicPath: '/'
+        path: paths.dist.root,
+        filename: `${source.js}/${filename.js}.js`,
+        publicPath: publicPath.root
     },
     resolve: {
         extensions: ['*', '.js', '.json', '.scss'],
         alias: {
-            node_modules: path.join(__dirname, 'node_modules'),
-            layouts: path.join(__dirname, 'src/layouts'),
-            pages: path.join(__dirname, 'src/pages'),
-            partials: path.join(__dirname, 'src/partials'),
-            components: path.join(__dirname, 'src/components'),
-            static: path.join(__dirname, 'src/static'),
-            images: path.join(__dirname, 'src/assets/images'),
-            fonts: path.join(__dirname, 'src/assets/fonts'),
-            modules: path.join(__dirname, 'src/assets/js/modules'),
+            node_modules: paths.node_modules,
+            modules: paths.src.modules
         }
     },
     module: {
@@ -68,7 +61,7 @@ let common = {
                             sourceMap: !isProduction,
                             outputStyle: isProduction && 'compressed',
                             includePaths: [
-                              path.resolve(__dirname, './src/assets/scss'),
+                              paths.src.scss,
                             ],
                         }
                     }
@@ -82,8 +75,8 @@ let common = {
                         loader: 'file-loader',
                         options: {
                             name: '[name].[ext]',
-                            outputPath: 'assets/images',
-                            publicPath: '../images'
+                            outputPath: source.images,
+                            publicPath: publicPath.images
                         },
                     },
                     {
@@ -101,8 +94,8 @@ let common = {
                     loader: 'file-loader',
                     options: {
                         name: '[name].[ext]',
-                        outputPath: 'assets/fonts',
-                        publicPath: '../fonts'
+                        outputPath: source.fonts,
+                        publicPath: publicPath.fonts
                     },
                 }],
             },
@@ -110,7 +103,7 @@ let common = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'assets/css/app.css'
+            filename: `${source.css}/${filename.scss}.css`
         })
     ]
 };
