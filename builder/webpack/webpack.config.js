@@ -19,7 +19,8 @@ let common = {
         extensions: ['*', '.js', '.json', '.scss'],
         alias: {
             node_modules: paths.node_modules,
-            modules: paths.src.modules
+            modules: paths.src.modules,
+            components: paths.src.components
         }
     },
     module: {

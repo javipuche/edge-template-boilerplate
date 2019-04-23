@@ -23,7 +23,8 @@ const source = {
     scss: 'assets/scss',
     css: 'assets/css',
     js: 'assets/js',
-    modules: 'assets/js/modules'
+    modules: 'assets/js/modules',
+    docs: 'docs'
 };
 
 
@@ -46,7 +47,8 @@ const paths = {
         images: path.join(__dirname, `/${source.src}/${source.images}`),
         scss: path.join(__dirname, `/${source.src}/${source.scss}`),
         js: path.join(__dirname, `/${source.src}/${source.js}`),
-        modules: path.join(__dirname, `/${source.src}/${source.modules}`)
+        modules: path.join(__dirname, `/${source.src}/${source.modules}`),
+        docs: path.join(__dirname, `/${source.src}/${source.docs}`)
     },
     dist: {
         root: path.join(__dirname, `/${source.dist}`),
@@ -54,7 +56,8 @@ const paths = {
         assets: path.join(__dirname, `/${source.dist}/${source.assets}`),
         fonts: path.join(__dirname, `/${source.dist}/${source.fonts}`),
         images: path.join(__dirname, `/${source.dist}/${source.images}`),
-        js: path.join(__dirname, `/${source.dist}/${source.js}`)
+        js: path.join(__dirname, `/${source.dist}/${source.js}`),
+        docs: path.join(__dirname, `/${source.dist}/${source.docs}`)
     },
     node_modules: path.join(__dirname, '../node_modules')
 };
@@ -79,7 +82,8 @@ const ext = {
     template: '.edge',
     data: '.json',
     fonts: '.{eot,ttf,svg,woff,woff2}',
-    images: '.{gif,png,jpg,jpeg,svg}'
+    images: '.{gif,png,jpg,jpeg,svg}',
+    markdown: '.md'
 };
 
 

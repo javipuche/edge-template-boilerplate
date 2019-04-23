@@ -47,6 +47,7 @@
     "gulp-plumber": "^1.2.1",
     "gulp-pretty-html": "^2.0.10",
     "image-webpack-loader": "^4.6.0",
+    "malvid": "^5.5.1",
     "mini-css-extract-plugin": "^0.6.0",
     "node-notifier": "^5.4.0",
     "node-sass": "^4.11.0",
