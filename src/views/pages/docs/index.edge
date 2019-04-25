@@ -1,0 +1,19 @@
+@layout('layouts.docs.default')
+
+@section('body')
+    @set('pageTitle', 'Documentation')
+
+    @markdown
+        # markdown text
+
+        markdown text
+
+        @!component('components.input.input')
+
+        markdown text
+
+        ## markdown text
+    @endmarkdown
+
+    <a href="{{ root }}docs/components/index.html">Components</a>
+@endsection

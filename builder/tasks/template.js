@@ -6,6 +6,8 @@ import gulpif from 'gulp-if';
 import browserSync from 'browser-sync';
 import getDataFromJson from '../modules/getDataFromJson';
 import notify from '../modules/notify';
+import edge from 'edge.js';
+import { Markdown } from '../modules/tags/markdown';
 import { paths, publicPath, ext, isProduction, gulpType } from '../config';
 
 const template = function () {
@@ -15,7 +17,10 @@ const template = function () {
         data: getDataFromJson().data,
         root: publicPath.root
     }, {
-        path: paths.src.views
+        path: paths.src.views,
+        tags: [
+            new Markdown()
+        ]
     })).on('error', function (error) {
         return console.error(error.toString()),
         notify(error.toString());

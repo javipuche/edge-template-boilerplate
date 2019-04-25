@@ -22,10 +22,10 @@ const generateDocs = async () => {
     const html = await results.html();
     const json = await results.json();
 
-    fs.mkdir(paths.dist.docs, { recursive: true }, (err) => {
+    fs.mkdir(`${paths.dist.docs}/components`, { recursive: true }, (err) => {
         if (err) throw err;
-        fs.writeFileSync(`${paths.dist.docs}/index.html`, html, {flag: 'w'});
-        fs.writeFileSync(`${paths.dist.docs}/index.html.json`, JSON.stringify(json), {flag: 'w'});
+        fs.writeFileSync(`${paths.dist.docs}/components/index.html`, html, {flag: 'w'});
+        fs.writeFileSync(`${paths.dist.docs}/components/index.html.json`, JSON.stringify(json), {flag: 'w'});
     });
 };
 

@@ -26,7 +26,7 @@ const generatePreview = async () => {
             edge.registerViews(paths.src.views);
 
             let html = edge.renderString(`
-                @layout('layouts.docs')
+                @layout('layouts.docs.components')
                 @section('body')
                     ${htmlString}
                 @endsection
