@@ -92,7 +92,7 @@ const ext = {
  */
 
 const filename = {
-    scss: 'app',
+    scss: 'styles',
     scssDocs: 'docs',
     js: 'app'
 };

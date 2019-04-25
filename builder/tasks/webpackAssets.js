@@ -6,6 +6,7 @@ import notify from '../modules/notify';
 import server from '../modules/server';
 import watch from '../modules/watch';
 import reloadBrowser from '../modules/reloadBrowser';
+import named from 'vinyl-named';
 import { paths, ext, filename, isProduction, isWatching, gulpType } from '../config';
 
 const webpackAssets = function () {
@@ -14,8 +15,12 @@ const webpackAssets = function () {
     let webpackConfig = Object.assign(webpackConfigFile, webpackOptions);
     let runFirstTime = true;
 
-    return gulp.src([`${paths.src.js}/${filename.js}.js`, `${paths.src.scss}/${filename.scss}.scss`])
-    .pipe(plumber())
+    return gulp.src([
+        `${paths.src.js}/${filename.js}.js`,
+        `${paths.src.scss}/${filename.scss}.scss`,
+        `${paths.src.scss}/${filename.scssDocs}.scss`
+    ])
+    .pipe(named())
     .pipe(webpackStream(webpackConfig, webpack, (err, stats) => {
         if (stats.compilation.errors.length) {
             if (isWatching) console.log(stats.compilation.errors.toString());
@@ -30,6 +35,7 @@ const webpackAssets = function () {
             runFirstTime = false;
         }
     }))
+    .pipe(plumber())
     .pipe(gulpType.dest(paths.dist.root));
 };
 

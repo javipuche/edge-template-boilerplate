@@ -12,7 +12,7 @@ import { source, paths, publicPath, ext, filename, isProduction, isWatching, gul
 let common = {
     output: {
         path: paths.dist.root,
-        filename: `${source.js}/${filename.js}.js`,
+        filename: `${source.js}/[name].js`,
         publicPath: publicPath.root
     },
     resolve: {
@@ -104,7 +104,7 @@ let common = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: `${source.css}/${filename.scss}.css`
+            filename: `${source.css}/[name].css`
         })
     ]
 };

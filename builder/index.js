@@ -7,6 +7,7 @@ import staticFolder from './tasks/staticFolder';
 import webpackAssets from './tasks/webpackAssets';
 import generateDocs from './docs/generateDocs';
 import generatePreview from './docs/generatePreview';
+import deleteTmpFiles from './tasks/deleteTmpFiles';
 
-gulp.task('build', gulp.series(cleanDist, gulp.parallel(template, staticFolder, webpackAssets, generateDocs, generatePreview)));
+gulp.task('build', gulp.series(cleanDist, gulp.parallel(template, staticFolder, webpackAssets, generateDocs, generatePreview), deleteTmpFiles));
 gulp.task('default', gulp.series('build'));

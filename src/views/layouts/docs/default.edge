@@ -7,63 +7,26 @@
         <title>{{ pageTitle ? pageTitle : 'Page without title' }}</title>
 
         @section('css')
-            <style>
-                * {
-                    box-sizing: border-box;
-                }
-
-                body {
-                    background-color: #f5f5f5;
-                    font: normal 400 100%/1.6 system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-                    margin: 0;
-                    padding: 24px;
-                }
-
-                body.home {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(280px, 400px));
-                    grid-gap: 24px;
-                    min-height: 100vh;
-                    justify-content: center;
-                    align-items: center;
-                }
-
-                .choice {
-                    background-color: #fff;
-                    border-radius: 4px;
-                    color: currentColor;
-                    text-decoration: none;
-                    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
-                    transition: all .3s;
-                }
-
-                .choice:hover {
-                    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px;
-                }
-
-                .choice__box {
-                    padding: 24px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: rgba(45, 144, 232, 0.15);
-                }
-
-                .choice__img {
-                    max-width: 80px;
-                    display: inline-block;
-                }
-
-                .choice__title {
-                    display: block;
-                    text-align: center;
-                    padding: 24px;
-                    font-size: 18px;
-                }
-            </style>
+            <link rel="stylesheet" href="{{ root }}assets/css/docs.css">
         @endsection
     </head>
     <body class="{{ bodyClass }}">
-        @!section('body')
+        <div class="dc-layout">
+            <input id="nav" class="dc-layout__toggle" type="checkbox">
+            <label for="nav" class="dc-layout__btn">
+                <span class="dc-layout__btn-open">Menu</span>
+                <span class="dc-layout__btn-close">Close</span>
+            </label>
+            <aside class="dc-layout__sidebar">
+                <nav class="dc-nav">
+                    <ul class="dc-nav__list">
+                        <li class="dc-nav__item"><a class="nav__link" href="{{ root }}docs/components/index.html">Components</a></li>
+                    </ul>
+                </nav>
+            </aside>
+            <main class="dc-layout__content">
+                @!section('body')
+            </main>
+        </div>
     </body>
 </html>
