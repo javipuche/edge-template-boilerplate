@@ -2,11 +2,11 @@ import fs from 'fs';
 import malvid from 'malvid';
 import { paths, publicPath, source, ext } from '../config';
 
-const generateDocs = async () => {
+const generateDocsComponents = async () => {
 
     const results = await malvid({
         src: paths.src.components,
-        pattern: `**/*${ext.template}`,
+        pattern: `[^_]**/[^_]*${ext.template}`,
         url: (url) => `${publicPath.root}${source.docs}` + url,
         style: "#iframe { padding: 1.2em }",
         resolvers: [
@@ -29,4 +29,4 @@ const generateDocs = async () => {
     });
 };
 
-export default generateDocs;
+export default generateDocsComponents;

@@ -3,7 +3,7 @@ import edge from 'edge.js';
 import directoryTree from 'directory-tree';
 import { paths } from '../config';
 
-const generatePreview = async () => {
+const generateDocsComponentsPreview = async () => {
     let tree = directoryTree(paths.src.components, {
         normalizePath: true,
         extensions: /\.(edge|json)$/
@@ -26,7 +26,7 @@ const generatePreview = async () => {
             edge.registerViews(paths.src.views);
 
             let html = edge.renderString(`
-                @layout('layouts.docs.components')
+                @layout('components._layout')
                 @section('body')
                     ${htmlString}
                 @endsection
@@ -40,4 +40,4 @@ const generatePreview = async () => {
     });
 };
 
-export default generatePreview;
+export default generateDocsComponentsPreview;

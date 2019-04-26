@@ -46,6 +46,7 @@
     "gulp-mem": "^0.1.1",
     "gulp-plumber": "^1.2.1",
     "gulp-pretty-html": "^2.0.10",
+    "highlight.js": "^9.15.6",
     "image-webpack-loader": "^4.6.0",
     "malvid": "^5.5.1",
     "marked": "^0.6.2",
