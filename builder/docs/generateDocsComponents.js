@@ -7,7 +7,7 @@ const generateDocsComponents = async () => {
     const results = await malvid({
         src: paths.src.components,
         pattern: `[^_]**/[^_]*${ext.template}`,
-        url: (url) => `${publicPath.root}${source.docs}` + url,
+        url: (url) => `${publicPath.root}${source.docs}/components/preview` + url,
         style: "#iframe { padding: 1.2em }",
         resolvers: [
     		require('malvid/src/resolvers/notes'),

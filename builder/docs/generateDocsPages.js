@@ -2,7 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import directoryTree from 'directory-tree';
 import marked from 'marked';
-import { paths } from '../config';
+import edge from 'edge.js';
+import { paths, publicPath } from '../config';
 
 const createFiles = async function (files) {
     await files.map((item) => {
@@ -10,7 +11,20 @@ const createFiles = async function (files) {
             fs.mkdirSync(`${paths.dist.docs}${item.path.split(paths.src.docs)[1]}`, { recursive: true }, (err) => { if (err) throw err; });
             createFiles(item.children);
         } else {
-            fs.writeFileSync(`${paths.dist.docs}${item.path.split(paths.src.docs)[1].split('.')[0]}.html`, 'sdasdasd', {flag: 'w'});
+            let code = fs.readFileSync(item.path, "utf8", (err) => { if (err) throw err; });
+
+            edge.registerViews(paths.src.views);
+
+            let html = edge.renderString(`
+                @layout('layouts.docs')
+                @section('body')
+                    ${marked(code)}
+                @endsection
+            `, {
+                root: publicPath.root
+            });
+
+            fs.writeFileSync(`${paths.dist.docs}${item.path.split(paths.src.docs)[1].split('.')[0]}.html`, html, {flag: 'w'});
         }
     });
 };

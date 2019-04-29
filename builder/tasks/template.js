@@ -4,9 +4,9 @@ import gulpEdge from 'gulp-edgejs';
 import htmlbeautify from 'gulp-pretty-html';
 import gulpif from 'gulp-if';
 import browserSync from 'browser-sync';
+import edge from 'edge.js';
 import getDataFromJson from '../modules/getDataFromJson';
 import notify from '../modules/notify';
-import edge from 'edge.js';
 import { paths, publicPath, ext, isProduction, gulpType } from '../config';
 
 const template = function () {

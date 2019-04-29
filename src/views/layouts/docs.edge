@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>{{ pageTitle ? pageTitle : 'Page without title' }}</title>
+
+        @section('css')
+            <link rel="stylesheet" href="{{ root }}assets/css/docs.css">
+        @endsection
+    </head>
+    <body class="{{ bodyClass }}">
+        <div class="dc-layout">
+            <input id="nav" class="dc-layout__toggle" type="checkbox">
+            <label for="nav" class="dc-layout__btn">
+                <span class="dc-layout__btn-open">Menu</span>
+                <span class="dc-layout__btn-close">Close</span>
+            </label>
+            <aside class="dc-layout__sidebar">
+                <nav class="dc-nav">
+                    <ul class="dc-nav__list">
+                        <li class="dc-nav__item"><a class="nav__link" href="{{ root }}docs/components/index.html">Components</a></li>
+                    </ul>
+                </nav>
+            </aside>
+            <main class="dc-layout__content">
+                @!section('body')
+            </main>
+        </div>
+
+        @section('scripts')
+            <script src="{{root}}assets/js/docs.js" charset="utf-8" defer></script>
+        @endsection
+    </body>
+</html>

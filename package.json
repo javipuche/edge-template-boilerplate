@@ -62,5 +62,8 @@
     "webpack": "^4.30.0",
     "webpack-merge": "^4.2.1",
     "webpack-stream": "^5.2.1"
+  },
+  "dependencies": {
+    "ace-builds": "^1.4.4"
   }
 }
