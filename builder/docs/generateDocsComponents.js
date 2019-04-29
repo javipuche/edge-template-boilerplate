@@ -2,12 +2,13 @@ import fs from 'fs';
 import malvid from 'malvid';
 import { paths, publicPath, source, ext } from '../config';
 
-const generateDocs = async () => {
+const generateDocsComponents = async () => {
 
     const results = await malvid({
+        title: 'Components Documentation',
         src: paths.src.components,
-        pattern: `**/*${ext.template}`,
-        url: (url) => `${publicPath.root}${source.docs}` + url,
+        pattern: `[^_]**/[^_]*${ext.template}`,
+        url: (url) => `${publicPath.root}${source.docs}/components/preview` + url,
         style: "#iframe { padding: 1.2em }",
         resolvers: [
     		require('malvid/src/resolvers/notes'),
@@ -22,11 +23,11 @@ const generateDocs = async () => {
     const html = await results.html();
     const json = await results.json();
 
-    fs.mkdir(paths.dist.docs, { recursive: true }, (err) => {
+    fs.mkdir(`${paths.dist.docs}/components`, { recursive: true }, (err) => {
         if (err) throw err;
-        fs.writeFileSync(`${paths.dist.docs}/index.html`, html, {flag: 'w'});
-        fs.writeFileSync(`${paths.dist.docs}/index.html.json`, JSON.stringify(json), {flag: 'w'});
+        fs.writeFileSync(`${paths.dist.docs}/components/index.html`, html, {flag: 'w'});
+        fs.writeFileSync(`${paths.dist.docs}/components/index.html.json`, JSON.stringify(json), {flag: 'w'});
     });
 };
 
-export default generateDocs;
+export default generateDocsComponents;
