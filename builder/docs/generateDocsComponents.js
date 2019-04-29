@@ -5,6 +5,7 @@ import { paths, publicPath, source, ext } from '../config';
 const generateDocsComponents = async () => {
 
     const results = await malvid({
+        title: 'Components Documentation',
         src: paths.src.components,
         pattern: `[^_]**/[^_]*${ext.template}`,
         url: (url) => `${publicPath.root}${source.docs}/components/preview` + url,

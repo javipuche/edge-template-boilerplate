@@ -17,7 +17,6 @@ const webpackAssets = function () {
 
     return gulp.src([
         `${paths.src.js}/${filename.js}.js`,
-        `${paths.src.js}/${filename.jsDocs}.js`,
         `${paths.src.scss}/${filename.scss}.scss`,
         `${paths.src.scss}/${filename.scssDocs}.scss`
     ])
