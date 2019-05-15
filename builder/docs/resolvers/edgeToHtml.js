@@ -1,5 +1,6 @@
 import fs from 'fs';
 import edge from 'edge.js';
+import path from 'path';
 import { paths } from '../../config';
 
 module.exports = {
@@ -7,15 +8,18 @@ module.exports = {
     label: 'HTML',
     languages: [ 'html' ],
     parse: async (contents, filePath) => {
-        let path = filePath.replace('.edge','.data.json');
-        let dataString = {};
+        let filename = path.basename(filePath, '.edge');
+        let dataString;
 
-        if (fs.existsSync(path)) {
-            dataString = JSON.parse(fs.readFileSync(path, 'utf8'));
+        filePath = filePath.replace('.edge','.data.json');
+
+        if (fs.existsSync(filePath)) {
+            dataString = JSON.parse(fs.readFileSync(filePath, 'utf8'));
         }
 
         edge.registerViews(paths.src.views);
-        let html = edge.renderString((await contents).trim(), dataString);
+
+        let html = edge.renderString(`<!-- Start ${filename} -->\n${(await contents).trim()}\n<!-- End ${filename} -->`, dataString);
 
         return html;
     },

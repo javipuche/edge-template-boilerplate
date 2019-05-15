@@ -3,11 +3,10 @@ import malvid from 'malvid';
 import { paths, publicPath, source, ext } from '../config';
 
 const generateDocsComponents = async () => {
-
     const results = await malvid({
         title: 'Components Documentation',
         src: paths.src.components,
-        pattern: `[^_]**/[^_]*${ext.template}`,
+        pattern: `**/*.${ext.template}`,
         url: (url) => `${publicPath.root}${source.docs}/components/preview` + url,
         style: "#iframe { padding: 1.2em }",
         resolvers: [

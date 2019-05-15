@@ -1,8 +1,7 @@
 import path from 'path';
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
-import merge from 'webpack-merge';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import { source, paths, publicPath, ext, filename, isProduction, isWatching, gulpType } from '../config';
+import { source, paths, publicPath, isProduction, alias } from '../config';
 
 
 /* -----------------------------------------------------------------------------
@@ -17,11 +16,7 @@ let common = {
     },
     resolve: {
         extensions: ['*', '.js', '.json', '.scss'],
-        alias: {
-            node_modules: paths.node_modules,
-            modules: paths.src.modules,
-            components: paths.src.components
-        }
+        alias: alias
     },
     module: {
         rules: [
@@ -50,7 +45,7 @@ let common = {
                                 require('autoprefixer')({
                                     browsers: '> 5%'
                                 }),
-                                require('css-mqpacker')({
+                                require('@lipemat/css-mqpacker')({
                                     sort: true
                                 })
                             ]
@@ -59,10 +54,11 @@ let common = {
                     {
                         loader: 'sass-loader',
                         options: {
+                            implementation: require('sass'),
                             sourceMap: !isProduction,
-                            outputStyle: isProduction && 'compressed',
+                            outputStyle: isProduction ? 'compressed' : 'expanded',
                             includePaths: [
-                              paths.src.scss,
+                              paths.src.sass,
                             ],
                         }
                     }
@@ -116,7 +112,7 @@ let common = {
  */
 
 if (!isProduction) {
-    module.exports = merge(common, {
+    module.exports = Object.assign(common, {
         mode: 'development',
         devtool: 'source-map'
     });
@@ -128,7 +124,7 @@ if (!isProduction) {
  */
 
 if (isProduction) {
-    module.exports = merge(common, {
+    module.exports = Object.assign(common, {
         mode: 'production',
         optimization: {
             minimizer: [

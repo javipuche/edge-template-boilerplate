@@ -1,0 +1,14 @@
+{
+    "compClass": "test-comp",
+    "elementClass": "test-element",
+    "id": "password",
+    "type": "password",
+    "placeholder": "Enter your password",
+    "required": true,
+    "labelClass": "test-label",
+    "textClass": "test-text",
+    "$slot": {
+        "label": "Lorem ipsum dolor <a href='#'>sit amet.</a>",
+        "icon": "<span class='c-icon'>Icon</span>"
+    }
+}

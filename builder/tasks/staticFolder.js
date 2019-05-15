@@ -1,9 +1,8 @@
 import gulp from 'gulp';
-import { paths, ext, gulpType } from '../config';
+import { paths, gulpMem } from '../config';
 
-const staticFolder = function () {
-    return gulp.src(`${paths.src.static}/**/*`)
-    .pipe(gulpType.dest(paths.dist.static));
-};
+const staticFolder = () =>
+    gulp.src(`${paths.src.static}/**/*`, { since: gulp.lastRun(staticFolder) })
+    .pipe(gulpMem.dest(paths.dist.static));
 
 export default staticFolder;

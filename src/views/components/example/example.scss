@@ -1,0 +1,41 @@
+/* -----------------------------------------------------------------------------
+ * INPUT
+ */
+
+
+.c-input {
+  display: grid;
+  grid-template-columns: 1fr 48px;
+  grid-column-gap: 16px;
+  grid-row-gap: 8px;
+
+  &__element {
+    height: 48px;
+    width: 100%;
+    grid-row: 2/3;
+    grid-column: 1/-1;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    &::placeholder {
+      font-size: 16px;
+    }
+  }
+
+  &__label {
+    grid-row: 1/2;
+    grid-column: 1/-1;
+
+    a {
+      color: green;
+    }
+  }
+
+  &__icon {
+    grid-row: 2/3;
+    grid-column: 2/3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

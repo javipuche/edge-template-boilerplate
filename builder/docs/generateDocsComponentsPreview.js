@@ -11,8 +11,8 @@ const generateDocsComponentsPreview = async () => {
 
     await tree.children.map((item) => {
         if (item.children) {
-            let dataString = {};
-            let htmlString = '';
+            let dataString;
+            let htmlString;
 
             item.children.map((child) => {
                 if (child.extension == '.json') {
@@ -26,10 +26,20 @@ const generateDocsComponentsPreview = async () => {
             edge.registerViews(paths.src.views);
 
             let html = edge.renderString(`
-                @layout('components._layout')
-                @section('body')
-                    ${htmlString}
-                @endsection
+                <!DOCTYPE html>
+                <html lang="es">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+                        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                        <title>Components Documentation</title>
+                        <link rel="stylesheet" href="/assets/css/styles.css">
+                    </head>
+                    <body>
+                        ${htmlString}
+                        <script src="/assets/js/app.js" charset="utf-8" defer></script>
+                    </body>
+                </html>
             `, Object.assign(dataString, { root: publicPath.root }));
 
             fs.mkdir(`${paths.dist.docs}/components/preview/${item.name}`, { recursive: true }, (err) => {

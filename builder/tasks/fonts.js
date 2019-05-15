@@ -1,9 +1,8 @@
 import gulp from 'gulp';
-import { paths, ext, gulpType } from '../config';
+import { paths, ext, gulpMem } from '../config';
 
-const fonts = function () {
-    return gulp.src(`${paths.src.fonts}/**/*${ext.fonts}`)
-    .pipe(gulpType.dest(paths.dist.fonts));
-};
+const fonts = () =>
+    gulp.src(`${paths.src.fonts}/**/*.{eot,ttf,svg,woff,woff2}`, { since: gulp.lastRun(fonts) })
+    .pipe(gulpMem.dest(paths.dist.fonts));
 
 export default fonts;

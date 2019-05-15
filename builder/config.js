@@ -1,29 +1,40 @@
+import path from 'path';
 import gulp from 'gulp';
 import GulpMem from 'gulp-mem';
-import path from 'path';
 
 
 /* -----------------------------------------------------------------------------
- * Source
+ * Process flags
+ */
+
+
+const isProduction = process.argv.indexOf('--production') >= 0;
+const isServerUp   = process.argv.indexOf('--server') >= 0;
+const isWatching   = process.argv.indexOf('--watch') >= 0;
+
+
+/* -----------------------------------------------------------------------------
+ * Sources
  */
 
 const source = {
     dist: '../dist',
     src: '../src',
-    data: 'data',
     views: 'views',
     components: 'views/components',
     layouts: 'views/layouts',
     pages: 'views/pages',
     partials: 'views/partials',
-    static: 'static',
     assets: 'assets',
-    fonts: 'assets/fonts',
-    images: 'assets/images',
-    scss: 'assets/scss',
+    sass: 'assets/sass',
+    sassApp: 'assets/sass/app',
     css: 'assets/css',
     js: 'assets/js',
-    modules: 'assets/js/modules',
+    jsApp: 'assets/js/app',
+    fonts: 'assets/fonts',
+    images: 'assets/images',
+    static: 'static',
+    data: 'data',
     docs: 'docs'
 };
 
@@ -35,31 +46,40 @@ const source = {
 const paths = {
     src: {
         root: path.join(__dirname, `/${source.src}`),
-        data: path.join(__dirname, `/${source.src}/${source.data}`),
         views: path.join(__dirname, `/${source.src}/${source.views}`),
         components: path.join(__dirname, `/${source.src}/${source.components}`),
         layouts: path.join(__dirname, `/${source.src}/${source.layouts}`),
         pages: path.join(__dirname, `/${source.src}/${source.pages}`),
         partials: path.join(__dirname, `/${source.src}/${source.partials}`),
-        static: path.join(__dirname, `/${source.src}/${source.static}`),
         assets: path.join(__dirname, `/${source.src}/${source.assets}`),
+        sass: path.join(__dirname, `/${source.src}/${source.sass}`),
+        sassApp: path.join(__dirname, `/${source.src}/${source.sassApp}`),
+        jsApp: path.join(__dirname, `/${source.src}/${source.jsApp}`),
         fonts: path.join(__dirname, `/${source.src}/${source.fonts}`),
         images: path.join(__dirname, `/${source.src}/${source.images}`),
-        scss: path.join(__dirname, `/${source.src}/${source.scss}`),
-        js: path.join(__dirname, `/${source.src}/${source.js}`),
-        modules: path.join(__dirname, `/${source.src}/${source.modules}`),
-        docs: path.join(__dirname, `/${source.src}/${source.docs}`)
+        static: path.join(__dirname, `/${source.src}/${source.static}`),
+        data: path.join(__dirname, `/${source.src}/${source.data}`)
     },
     dist: {
         root: path.join(__dirname, `/${source.dist}`),
-        static: path.join(__dirname, `/${source.dist}/${source.static}`),
         assets: path.join(__dirname, `/${source.dist}/${source.assets}`),
+        css: path.join(__dirname, `/${source.dist}/${source.css}`),
+        js: path.join(__dirname, `/${source.dist}/${source.js}`),
         fonts: path.join(__dirname, `/${source.dist}/${source.fonts}`),
         images: path.join(__dirname, `/${source.dist}/${source.images}`),
-        js: path.join(__dirname, `/${source.dist}/${source.js}`),
+        static: path.join(__dirname, `/${source.dist}/${source.static}`),
         docs: path.join(__dirname, `/${source.dist}/${source.docs}`)
     },
     node_modules: path.join(__dirname, '../node_modules')
+};
+
+
+/* -----------------------------------------------------------------------------
+ * Extensions files
+ */
+
+const ext = {
+    template: 'edge'
 };
 
 
@@ -75,56 +95,29 @@ const publicPath = {
 
 
 /* -----------------------------------------------------------------------------
- * Extensions files
+ * Alias
  */
 
-const ext = {
-    template: '.edge',
-    data: '.json',
-    fonts: '.{eot,ttf,svg,woff,woff2}',
-    images: '.{gif,png,jpg,jpeg,svg}',
-    markdown: '.md'
+const alias = {
+    node_modules: paths.node_modules,
+    components: paths.src.components,
+    assets: paths.src.assets
 };
 
 
 /* -----------------------------------------------------------------------------
- * Filenames
+ * Gulp Memory
  */
 
-const filename = {
-    scss: 'styles',
-    scssDocs: 'docs',
-    js: 'app',
-    jsDocs: 'docs'
-};
-
-
-/* -----------------------------------------------------------------------------
- * Process flags
- */
-
-const isProduction = process.argv.indexOf('--production') >= 0;
-const isServerUp   = process.argv.indexOf('--server') >= 0;
-const isWatching   = process.argv.indexOf('--watch') >= 0;
-
-
-/* -----------------------------------------------------------------------------
- * Compile files on memory
- */
-
-let gulpType;
+let gulpMem;
 
 if (isServerUp) {
-    gulpType = new GulpMem();
-    gulpType.serveBasePath = paths.dist.root;
-    gulpType.enableLog = false;
+    gulpMem = new GulpMem();
+    gulpMem.serveBasePath = paths.dist.root;
+    gulpMem.enableLog = false;
 } else {
-    gulpType = gulp;
+    gulpMem = gulp;
 }
 
 
-/* -----------------------------------------------------------------------------
- * Exports
- */
-
-export { source, paths, publicPath, ext, filename, isProduction, isServerUp, isWatching, gulpType };
+export { isProduction, isServerUp, isWatching, source, paths, ext, publicPath, alias, gulpMem };

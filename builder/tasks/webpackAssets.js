@@ -1,30 +1,35 @@
 import gulp from 'gulp';
+import glob from 'glob';
 import plumber from 'gulp-plumber';
-import webpack from 'webpack';
-import webpackStream from 'webpack-stream';
-import notify from '../modules/notify';
-import server from '../modules/server';
-import watch from '../modules/watch';
-import reloadBrowser from '../modules/reloadBrowser';
 import named from 'vinyl-named';
-import { paths, ext, filename, isProduction, isWatching, gulpType } from '../config';
+import webpackLib from 'webpack';
+import webpackStream from 'webpack-stream';
+import PluginError from 'plugin-error';
+import server from '../lib/server';
+import watch from '../lib/watch';
+import reloadBrowser from '../lib/reloadBrowser';
+import entries from '../lib/getWebpackEntries';
+import notify from '../lib/notify';
+import { paths, ext, filename, isProduction, isWatching, gulpMem } from '../config';
 
-const webpackAssets = function () {
-    let webpackOptions = isWatching ? { watch: true } : {};
-    let webpackConfigFile = require('../webpack/webpack.config');
-    let webpackConfig = Object.assign(webpackConfigFile, webpackOptions);
-    let runFirstTime = true;
+const webpackOptions = {
+    watch: isWatching ? true : false,
+    entry: entries()
+};
 
-    return gulp.src([
-        `${paths.src.js}/${filename.js}.js`,
-        `${paths.src.scss}/${filename.scss}.scss`,
-        `${paths.src.scss}/${filename.scssDocs}.scss`
-    ])
+const webpackConfigFile = require('../webpack/webpack.config');
+
+const webpackConfig = Object.assign(webpackConfigFile, webpackOptions);
+
+let runFirstTime = true;
+
+const webpackAssets = () =>
+    gulp.src(glob.sync(`${paths.src.jsApp}/**/*.js`))
     .pipe(named())
-    .pipe(webpackStream(webpackConfig, webpack, (err, stats) => {
+    .pipe(webpackStream(webpackConfig, webpackLib, (err, stats) => {
         if (stats.compilation.errors.length) {
-            if (isWatching) console.log(stats.compilation.errors.toString());
-            notify(stats.compilation.errors.toString());
+            notify('Error in webpack assets', stats.compilation.errors.toString());
+            stats.compilation.errors.forEach((err) => console.log(err));
         } else {
             if (runFirstTime) {
                 server();
@@ -36,7 +41,6 @@ const webpackAssets = function () {
         }
     }))
     .pipe(plumber())
-    .pipe(gulpType.dest(paths.dist.root));
-};
+    .pipe(gulpMem.dest(paths.dist.root));
 
 export default webpackAssets;

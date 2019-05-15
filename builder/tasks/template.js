@@ -5,12 +5,12 @@ import htmlbeautify from 'gulp-pretty-html';
 import gulpif from 'gulp-if';
 import browserSync from 'browser-sync';
 import edge from 'edge.js';
-import getDataFromJson from '../modules/getDataFromJson';
-import notify from '../modules/notify';
-import { paths, publicPath, ext, isProduction, gulpType } from '../config';
+import getDataFromJson from '../lib/getDataFromJson';
+import notify from '../lib/notify';
+import { paths, publicPath, ext, isProduction, gulpMem } from '../config';
 
-const template = function () {
-    return gulp.src(`${paths.src.pages}/**/*${ext.template}`)
+const template = () =>
+    gulp.src(`${paths.src.pages}/**/*.${ext.template}`)
     .pipe(plumber())
     .pipe(gulpEdge({
         data: getDataFromJson().data,
@@ -18,16 +18,15 @@ const template = function () {
     }, {
         path: paths.src.views
     })).on('error', function (error) {
-        return console.error(error.toString()),
-        notify(error.toString());
+        return console.error(error.toString()), notify('Error in template', error.message);
     })
     .pipe(gulpif(isProduction, htmlbeautify({
         preserve_newlines: false,
         max_preserve_newlines: 1,
-        editorconfig: true
+        editorconfig: true,
+        unformatted: ['code', 'pre']
     })))
-    .pipe(gulpType.dest(paths.dist.root))
+    .pipe(gulpMem.dest(paths.dist.root))
     .pipe(browserSync.stream());
-};
 
 export default template;
