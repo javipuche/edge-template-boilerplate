@@ -49,17 +49,3 @@
  */
 
 @import "../utilities/utilities";
-
-
-
-body {
-  @include breakpoint(s) {
-    color: red;
-  }
-}
-
-a {
-  @include breakpoint(s) {
-    color: red;
-  }
-}
